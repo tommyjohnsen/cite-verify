@@ -20,3 +20,8 @@ class EthicsOpinionAdapter(SourceAdapter, Protocol): ...
 class LocalReferenceAdapter(SourceAdapter, Protocol):
     """Hook for deterministic id. and supra resolution within one draft."""
 
+
+from .source_adapters import (  # noqa: E402,F401 - public adapter imports
+    BarEthicsAdapter, CrossrefAdapter, ECFRAdapter, GovInfoAdapter,
+    OpenAlexAdapter, WashingtonAdapter,
+)

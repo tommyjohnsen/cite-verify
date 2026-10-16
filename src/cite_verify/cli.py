@@ -11,12 +11,15 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="cite-verify")
     parser.add_argument("input", type=Path)
     parser.add_argument("--sidecar", type=Path)
+    parser.add_argument("--ethics-sources", type=Path,
+                        help="JSON file describing official bar ethics opinion sources")
     parser.add_argument("--cache-dir", type=Path, default=Path(".cache/cite-verify"))
     parser.add_argument("--format", choices=("csv", "markdown"), default="markdown")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
     text = args.input.read_text(encoding="utf-8")
-    results = verify_text(text, cache_dir=args.cache_dir, sidecar=args.sidecar)
+    results = verify_text(text, cache_dir=args.cache_dir, sidecar=args.sidecar,
+                          ethics_sources=args.ethics_sources)
     report = csv_report(results) if args.format == "csv" else markdown_report(results)
     if args.output:
         args.output.write_text(report, encoding="utf-8")

@@ -1,0 +1,1 @@
+[{"issuer":"EXB","citation_pattern":"EXB Opinion (?P<number>\\d+)(?:, (?P<title>[^.;]+))?","url_template":"https://example.com/opinions/{number}"}]
