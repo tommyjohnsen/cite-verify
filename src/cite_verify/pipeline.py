@@ -7,6 +7,7 @@ from .cache import LocalCache
 from .courtlistener import CourtListenerClient, Lookup, Transport, _transport
 from .extract import ExtractedCitation, extract_all_citations, normalize_citation
 from .models import Label, Result, SourceTag
+from .local_resolver import resolve_local
 from .sidecar import load_sidecar
 from .source_adapters import (
     BarEthicsAdapter, CrossrefAdapter, ECFRAdapter, GetTransport, GovInfoAdapter,
@@ -70,12 +71,15 @@ def verify_text(
     crossref = CrossrefAdapter(cache, contact_email=email, transport=source_transport)
     openalex = OpenAlexAdapter(cache, contact_email=email, api_key=oa_key, transport=source_transport)
     ethics = BarEthicsAdapter(cache, source_transport)
+    earlier: list[ExtractedCitation] = []
     for citation in citations:
         tag = tags.get(citation.normalized, SourceTag.PUBLIC)
         if citation.kind == "case":
             lookup = lookups.get(citation.normalized, Lookup(0, reason="no token"))
         elif citation.kind in {"id", "supra"}:
-            lookup = Lookup(0, reason=f"{citation.kind} resolver not yet available")
+            results.append(resolve_local(citation, earlier, tag))
+            earlier.append(citation)
+            continue
         elif citation.kind == "usc":
             lookup = govinfo.verify(citation)
         elif citation.kind == "cfr":
@@ -93,4 +97,5 @@ def verify_text(
         else:
             lookup = Lookup(0, reason="source adapter not yet available")
         results.append(_result(citation, lookup, tag))
+        earlier.append(citation)
     return results

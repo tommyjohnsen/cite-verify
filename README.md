@@ -23,7 +23,17 @@ runtime and are never put in reports or the cache.
 cite-verify draft.md --format markdown --output report.md
 cite-verify draft.md --sidecar sources.csv --format csv
 cite-verify draft.md --ethics-sources ethics-sources.json
+cite-verify lint draft.md
 ```
+
+`cite-verify lint` only flags possible citation-style issues; it never rewrites
+the draft. Its rule identifiers cover reporter abbreviations, pincites on case
+short forms, intervening authorities before `id.`, case citations using `supra`,
+and short forms that appear before a full citation. Each rule description is an
+original one-line paraphrase based on the open Indigo Book, not licensed text.
+
+`Id.` and `supra` references are resolved locally from citations in earlier
+text and Markdown footnotes. This resolution does not make a network request.
 
 Bar ethics sources are deliberately user supplied; no issuer list is bundled.
 The JSON file is a list (or an object with a `sources` list) containing
