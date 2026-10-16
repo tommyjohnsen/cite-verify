@@ -10,6 +10,9 @@ readme = "README.md"
 license = "Apache-2.0"
 requires-python = ">=3.11"
 dependencies = ["eyecite"]
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+]
 
 [project.scripts]
 cite-verify = "cite_verify.cli:main"
@@ -17,4 +20,3 @@ cite-verify = "cite_verify.cli:main"
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
-
