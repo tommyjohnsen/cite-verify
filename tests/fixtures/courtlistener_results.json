@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "status": 200,
+      "citation": "123 F.3d 456",
+      "normalized_citations": ["123 F.3d 456"],
+      "clusters": [{"absolute_url": "/opinion/123/example/"}],
+      "matched_field": "reporter+volume+page"
+    },
+    {
+      "status": 200,
+      "citation": "78 U.S. 88",
+      "absolute_url": "/opinion/456/example/",
+      "matched_field": "reporter+volume+page"
+    },
+    {
+      "status": 404,
+      "reason": "not found"
+    }
+  ]
+}

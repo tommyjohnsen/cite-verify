@@ -1,8 +1,9 @@
+.cache/
 .uv-cache/
-.pytest_cache/
 __pycache__/
+.pytest_cache/
 *.egg-info/
 .notify
-.cache/
-build/
 dist/
+build/
+pytest-of-*/
